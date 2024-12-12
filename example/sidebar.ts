@@ -72,23 +72,11 @@ export class Sidebar {
             if (!event.target) {
                 return;
             }
-            const target = event.target as HTMLSelectElement;
-            const pointShape = PointShape[target.selectedIndex];
-
             if (!this.targetPointcloud) {
                 return;
             }
-            switch(pointShape){
-                case "CIRCLE":
-                    this.targetPointcloud.material.shape = PointShape.CIRCLE;
-                    break;
-                case "SQUARE":
-                    this.targetPointcloud.material.shape = PointShape.SQUARE;
-                    break;
-                case "PARABOLOID":
-                    this.targetPointcloud.material.shape = PointShape.PARABOLOID;
-                    break;
-            }
+            const target = event.target as HTMLSelectElement;
+            this.targetPointcloud.material.shape = target.selectedIndex;
         });
         dropdownDiv.appendChild(dropdownSelect);
         this.sidebar.appendChild(dropdownDiv);
