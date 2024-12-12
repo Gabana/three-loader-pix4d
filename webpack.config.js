@@ -2,7 +2,9 @@ const path = require('path');
 const SizePlugin = require('size-plugin');
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: {
+    main: ['./src/index.ts'],
+  },
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'potree.js',
@@ -35,6 +37,21 @@ module.exports = {
       },
 
       { test: /\.(vs|fs|glsl|vert|frag)$/, loader: 'raw-loader' },
+    ],
+    rules: [
+      {
+        test: /\.ts$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.html$/,
+        use: 'html-loader',
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   plugins: [new SizePlugin()],

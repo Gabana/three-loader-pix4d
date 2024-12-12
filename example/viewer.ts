@@ -1,5 +1,5 @@
 import { PerspectiveCamera, Scene, WebGLRenderer } from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 import { PointCloudOctree, Potree, PotreeVersion } from '../src';
 
@@ -23,7 +23,7 @@ export class Viewer {
   /**
    * Controls which update the position of the camera.
    */
-  cameraControls!: any;
+  cameraControls!: OrbitControls;
   /**
    * Out potree instance which handles updating point clouds, keeps track of loaded nodes, etc.
    */

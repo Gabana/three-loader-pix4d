@@ -3,7 +3,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "sourceMap": true,
-    "module": "es2015",
+    "target": "es2020",
+    "module": "esnext",
+    // "module": "es2015",
     "moduleResolution": "node",
     "strict": true,
     "noImplicitAny": true,
@@ -12,7 +14,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "alwaysStrict": true,
-    "target": "es2020",
     "experimentalDecorators": true,
     "typeRoots": ["../node_modules/@types"],
     "lib": ["es2017", "dom"],

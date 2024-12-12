@@ -18,6 +18,7 @@ export interface NodeData {
 const NODE_STRIDE = 5;
 
 export class PointCloudOctreeGeometryNode extends EventDispatcher implements IPointCloudGeometryNode {
+  private static idCount = 0;
   id: number = PointCloudOctreeGeometryNode.idCount++;
   name: string;
   pcoGeometry: PointCloudOctreeGeometry;
@@ -50,7 +51,6 @@ export class PointCloudOctreeGeometryNode extends EventDispatcher implements IPo
   readonly isTreeNode: boolean = false;
   readonly isGeometryNode: boolean = true;
 
-  private static idCount = 0;
 
   constructor(name: string, pcoGeometry: PointCloudOctreeGeometry, boundingBox: Box3) {
     super();

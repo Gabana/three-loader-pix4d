@@ -1,12 +1,16 @@
-import { Vector3 } from 'three';
+import {  Vector3 } from 'three';
 import { ClipMode, PointCloudOctree } from '../src';
 import { Viewer } from './viewer';
+import { Sidebar } from './sidebar';
 
 require('./main.css');
 
 const targetEl: HTMLDivElement = document.createElement('div');
 targetEl.className = 'container';
 document.body.appendChild(targetEl);
+
+const sidebar: Sidebar = new Sidebar();
+sidebar.initialize(document.body);
 
 const viewer: Viewer = new Viewer();
 viewer.initialize(targetEl);
@@ -92,6 +96,7 @@ function setupPointCloud(version: 'v1' | 'v2', file: string, url: string): void 
             camera.lookAt(new Vector3());
 
             viewer.add(pco);
+            console.log("** PointCloud Loaded! ");
         })
         .catch(err => console.error(err));
 }
@@ -112,15 +117,26 @@ function setupUI(cfg: PointCloudsConfig): void {
     });
 
     const loadBtn = createButton('Load', () => setupPointCloud(cfg.version, cfg.file, cfg.url));
+    const editBtn = createButton('Edit', () => editPointcloud(cfg.version));
 
     const slider = createSlider(cfg.version);
-
+    
     const btnContainer: HTMLDivElement = document.createElement('div');
     btnContainer.className = 'btn-container-' + cfg.version;
     document.body.appendChild(btnContainer);
     btnContainer.appendChild(unloadBtn);
     btnContainer.appendChild(loadBtn);
+    btnContainer.appendChild(editBtn);
     btnContainer.appendChild(slider);
 }
 
+function editPointcloud(version: string){
+    const cloud = pointClouds[version];
+    if (!cloud) {
+        return;
+    }
+    sidebar.setTargetPointcloud(cloud);
+}
+
 examplePointClouds.forEach(setupUI);
+

@@ -5,6 +5,8 @@
     "sourceMap": true,
     "declaration": true,
     "declarationDir": "build/declarations",
+    "target": "es2020",
+    // "module": "esnext",
     "module": "es2015",
     "moduleResolution": "node",
     "strict": true,
@@ -14,11 +16,13 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "alwaysStrict": true,
-    "target": "es2020",
     "experimentalDecorators": true,
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2017", "dom"],
-    "plugins": []
+    "plugins": [],
+    "paths": {
+      "*": ["node_modules/*"]
+    }
   },
   "include": ["src/**/*.ts"],
   "exclude": ["build", "node_modules"]

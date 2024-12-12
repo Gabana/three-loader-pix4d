@@ -36,6 +36,8 @@ uniform float spacing;
 	uniform mat4 clipBoxes[max_clip_boxes];
 #endif
 
+uniform float heightMinRight;
+uniform float heightMaxRight;
 uniform float heightMin;
 uniform float heightMax;
 uniform float size; // pixel size factor
@@ -351,6 +353,15 @@ vec3 getElevation() {
 	return cElevation;
 }
 
+vec3 getElevationRight() {
+	vec4 world = modelMatrix * vec4( position, 1.0 );
+    // Daniel Gabana´s modifications
+	float w = (world.y - heightMinRight) / (heightMaxRight-heightMinRight);
+	vec3 cElevation = texture2D(gradient, vec2(w,1.0-w)).rgb;
+
+	return cElevation;
+}
+
 vec4 getClassification() {
 	vec2 uv = vec2(classification / 255.0, 0.5);
 	vec4 classColor = texture2D(classificationLUT, uv);
@@ -516,9 +527,9 @@ void main() {
 	#ifdef color_type_rgb
 		vColor = getRGB();
 	#elif defined color_type_height
-		vColor = getElevation();
+		vColor = getElevationRight();
 	#elif defined color_type_rgb_height
-		vec3 cHeight = getElevation();
+		vec3 cHeight = getElevationRight();
 		vColor = (1.0 - transition) * getRGB() + transition * cHeight;
 	#elif defined color_type_depth
 		float linearDepth = -mvPosition.z ;

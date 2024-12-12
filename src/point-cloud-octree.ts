@@ -63,6 +63,12 @@ export class PointCloudOctree extends PointCloudTree {
       this.matrixWorld,
     );
 
+    // Daniel Gabana´s new code
+    const bWidthRight = max.y - min.y;
+    material.heightMinRight = min.y - 0.2 * bWidthRight;
+    material.heightMaxRight = max.y + 0.2 * bWidthRight;
+
+    // Original code
     const bWidth = max.z - min.z;
     material.heightMin = min.z - 0.2 * bWidth;
     material.heightMax = max.z + 0.2 * bWidth;

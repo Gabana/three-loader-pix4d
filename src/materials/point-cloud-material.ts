@@ -67,6 +67,8 @@ export interface IPointCloudMaterialUniforms {
   diffuse: IUniform<[number, number, number]>;
   fov: IUniform<number>;
   gradient: IUniform<Texture>;
+  heightMaxRight: IUniform<number>;
+  heightMinRight: IUniform<number>;
   heightMax: IUniform<number>;
   heightMin: IUniform<number>;
   intensityBrightness: IUniform<number>;
@@ -199,6 +201,8 @@ export class PointCloudMaterial extends RawShaderMaterial {
     diffuse: makeUniform('fv', [1, 1, 1] as [number, number, number]),
     fov: makeUniform('f', 1.0),
     gradient: makeUniform('t', this.gradientTexture || new Texture()),
+    heightMaxRight: makeUniform('f', 1.0),
+    heightMinRight: makeUniform('f', 0.0),
     heightMax: makeUniform('f', 1.0),
     heightMin: makeUniform('f', 0.0),
     intensityBrightness: makeUniform('f', 0),
@@ -252,6 +256,8 @@ export class PointCloudMaterial extends RawShaderMaterial {
   @uniform('clipExtent') clipExtent!: [number, number, number, number];
   @uniform('depthMap') depthMap!: Texture | undefined;
   @uniform('fov') fov!: number;
+  @uniform('heightMaxRight') heightMaxRight!: number;
+  @uniform('heightMinRight') heightMinRight!: number;
   @uniform('heightMax') heightMax!: number;
   @uniform('heightMin') heightMin!: number;
   @uniform('intensityBrightness') intensityBrightness!: number;
